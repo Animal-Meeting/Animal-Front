@@ -46,8 +46,10 @@
     flex-direction: column;
     justify-content: space-between;  
     align-items: center;
-    position:fixed; 
-    left:545px; 
+    position:absolute; 
+    left:50%; 
+    top:50%;
+    transform: translate(-50%, -50%);
     width: 600px;
     height: 1000px; 
     z-index: 2;  

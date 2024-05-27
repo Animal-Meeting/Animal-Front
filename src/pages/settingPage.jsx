@@ -61,6 +61,7 @@ const SettingPage = () => {
 
     return (
         <div className="container">
+            {/*
             <div className="participant-wrapper">
                 {!isRow && (
                     <Statistic
@@ -71,7 +72,8 @@ const SettingPage = () => {
                         most_man_path="wolf"
                     />
                 )}
-            </div>
+            </div>*/}
+
             <div className="content-wrapper">
                 <div className="header">
                     <img className="mainLogo" src={`${process.env.PUBLIC_URL}/img/mainLogo.png`} />
@@ -145,11 +147,12 @@ const SettingPage = () => {
                     </div>
                 </div>
             </div>
+            {/*
             {!isRow && (
                 <div className="noticeboard-wrapper">
                     <NoticeBoard />
                 </div>
-            )}
+            )}*/}
         </div>
     );
 };
