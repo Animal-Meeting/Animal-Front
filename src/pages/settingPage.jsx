@@ -94,10 +94,10 @@ const SettingPage = () => {
                         <div className="speech-text">
                             <p>
                                 {isPreviousTypingFinished ? (
-                                    "오늘 동물상 미팅을 하러 온 주민이구나!"
+                                    "오늘 동물상 측정을 하러 온 주민이구나!"
                                 ) : (
                                     <TypingText
-                                        text="오늘 동물상 미팅을 하러 온 주민이구나!"
+                                        text="오늘 동물상 측정을 하러 온 주민이구나!"
                                         onFinish={handlePreviousTypingFinish}
                                     />
                                 )}

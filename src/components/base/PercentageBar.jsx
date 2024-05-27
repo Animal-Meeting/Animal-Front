@@ -8,18 +8,18 @@ const PercentageBar = (props) => {
                 src={props.iconSrc}
                 alt="icon"
                 style={{
-                    width: "24px",
-                    height: "24px",
+                    width: "30px",
+                    height: "30px",
                     marginRight: "5px",
                 }}
             />
             <span
                 style={{
-                    width: "80px",
+                    width: "70px",
                     textAlign: "left",
                     fontFamily: "Cafe24Ssurround",
                     alignItems: "center",
-                    fontSize: "1.2rem",
+                    fontSize: "1.4rem",
                 }}
             >
                 {props.title}

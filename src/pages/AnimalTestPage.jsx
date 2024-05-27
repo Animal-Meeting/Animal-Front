@@ -172,11 +172,16 @@ const AnimalTestPage = () => {
             <div className="screen_container">
                 <div className="center_container">
                     {/* <div className="header_container_v1">
-                        <img style={{ width: "260px" }} src={`${process.env.PUBLIC_URL}/img/mainLogo.png`} />
+                        <img style={{ 
+                            width: "450px", 
+                            marginTop : "45px"
+                        }} 
+                        src={`${process.env.PUBLIC_URL}/img/mainLogoNew.png`} />
                     </div> */}
                     <div className="header_container_v2">
                         <GradientButton
                             content="Ai Animal Test"
+                            buttonStyle={{display: "none"}}
                             textStyle={{
                                 fontSize: "2.6rem",
                                 fontWeight: "800",
@@ -197,7 +202,7 @@ const AnimalTestPage = () => {
                         />
 
                         <div style={{ display: "flex", alignItems: "center" }}>
-                            <div style={{ marginRight: "5px" }}>
+                            {/* <div style={{ marginRight: "5px" }}>
                                 <GradientButton
                                     onClick={() => {
                                         setResultIndex((resultIndex + 1) % 6);
@@ -206,9 +211,10 @@ const AnimalTestPage = () => {
                                     buttonStyle={{
                                         fontSize: "1rem",
                                         fontWeight: "800",
+                                        // display: "none"
                                     }}
                                 />
-                            </div>
+                            </div> */}
                             <div style={{ marginRight: "5px" }}>
                                 <GradientButton
                                     onClick={() => {
@@ -245,7 +251,8 @@ const AnimalTestPage = () => {
                                     height: "100%",
                                     textAlign: "center",
                                     backgroundColor: "white",
-                                    padding: "20px",
+                                    paddingTop: "30px",
+                                    // paddingBottom : "20px",
                                     borderRadius: "10px",
                                     boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.2)",
                                     border: "1px solid rgba(0, 0, 0, 0.1)",
@@ -253,12 +260,13 @@ const AnimalTestPage = () => {
                                     flexDirection: "column",
                                     alignItems: "center",
                                     justifyContent: "center",
+                                    
                                 }}
                             >
                                 {showRotatingImage ? (
                                     <RotatingImage
-                                        height="24vh"
-                                        width="24vh"
+                                        height="30vh"
+                                        width="30vh"
                                         front={process.env.PUBLIC_URL + animalData.image}
                                         back={process.env.PUBLIC_URL + animalData.subImage}
                                     />
@@ -268,8 +276,8 @@ const AnimalTestPage = () => {
                                             src={process.env.PUBLIC_URL + animalData.image}
                                             alt={animalData.type}
                                             style={{
-                                                width: "24vh",
-                                                height: "24vh",
+                                                width: "30vh",
+                                                height: "30vh",
                                                 objectFit: "cover",
                                                 borderRadius: "20px",
                                                 border: "5px solid gainsboro",
@@ -280,8 +288,8 @@ const AnimalTestPage = () => {
                                             src={process.env.PUBLIC_URL + animalData.subImage}
                                             alt={animalData.type}
                                             style={{
-                                                width: "24vh",
-                                                height: "24vh",
+                                                width: "30vh",
+                                                height: "30vh",
                                                 objectFit: "cover",
                                                 borderRadius: "20px",
                                                 border: "5px solid gainsboro",
@@ -291,7 +299,16 @@ const AnimalTestPage = () => {
                                     </span>
                                 )}
 
-                                <p style={{ fontSize: "1.8rem", marginTop: "15px", fontWeight: "bold", color: "#333" }}>
+                                <p style={{ 
+                                 fontSize: "3rem", 
+                                 marginTop: "60px", 
+                                 fontWeight: "bold",
+                                 color: "#333",
+                                 textDecoration: "underline",
+                                 textDecorationColor: "#0ea5e9",
+                                 textDecorationStyle: "wavy",
+                                 fontFamily: "Cafe24Ssurround"                         
+                                 }}>
                                     {animalData && animalData.type}
                                 </p>
                                 <p
@@ -305,7 +322,9 @@ const AnimalTestPage = () => {
                                 >
                                     {animalData &&
                                         animalData.characteristics.map((characteristic, index) => (
-                                            <p key={index} style={{ margin: "0" }}>
+                                            <p key={index} style={{
+                                                 margin: "0", 
+                                                 }}>
                                                 {characteristic}
                                             </p>
                                         ))}
@@ -329,17 +348,19 @@ const AnimalTestPage = () => {
                                     height: "100%",
                                     textAlign: "center",
                                     backgroundColor: "white",
-                                    padding: "20px",
+                                    paddingBottom: "30px",
+                                    paddingTop : "30px",
                                     borderRadius: "10px",
                                     boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.2)",
                                     border: "1px solid rgba(0, 0, 0, 0.1)",
                                 }}
+                                
                             >
                                 <Webcam
                                     ref={webcamRef}
                                     mirrored={true}
-                                    width={"90%"}
-                                    height={"90%"}
+                                    width={"95%"}
+                                    height={"95%"}
                                     style={{ borderRadius: "10px" }}
                                     muted={false}
                                 />
@@ -351,7 +372,7 @@ const AnimalTestPage = () => {
                                 style={{
                                     position: "absolute",
                                     top: "40%",
-                                    left: "50%",
+                                    left: "35%",
                                     transform: "translate(-50%, -50%)",
                                     fontSize: "5rem",
                                     color: "white",
@@ -367,7 +388,7 @@ const AnimalTestPage = () => {
                                 style={{
                                     position: "absolute",
                                     top: "40%",
-                                    left: "50%",
+                                    left: "35%",
                                     transform: "translate(-50%, -50%)",
                                     fontSize: "5rem",
                                     color: "white",
@@ -449,9 +470,9 @@ const AnimalTestPage = () => {
                     </div>
                 </div>
             </div>
-            {/* <div className="right_container">
+            <div className="right_container">
                 <NoticeBoard />
-            </div> */}
+            </div>
         </div>
     );
 };

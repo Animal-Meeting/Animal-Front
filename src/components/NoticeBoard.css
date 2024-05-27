@@ -5,23 +5,25 @@
     border-radius: 40px;
     background-color: white;
     flex-direction: column;
-    width: 420px;
-    height: 760px;
-    overflow: hidden;
+    width: 700px;
+    height: 90%;
+    /* overflow: hidden; */
 }
 
 .noticeboard-header {
     padding-top: 5%;
-    padding-bottom: 5%;
+    border-radius: 40px 40px 0px 0px;
+    padding-bottom: 3%;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(255, 75, 75, 1);
+    background-color: rgb(253, 125, 118);
     color: white;
     font-size: 20px;
     font-family: "Cafe24Ssurround";
     width: 100%;  
+    margin-bottom: 10px;
 }
 
 .noticeboard-main {  
@@ -42,19 +44,25 @@
     display: flex;
     justify-content: center;
     align-items: center; 
-    padding: 5%;
-    background-color: rgba(255, 75, 75, 1);
+    padding: 4%;
+    background-color: rgb(253, 125, 118);
     color: white;
     font-size: 20px; 
 }
 
 
+.noticeboard-animal-list-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px ;
+}
 .noticeboard-woman, .noticeboard-man {
     display: flex; 
     justify-content: center; 
     flex-direction: column;
-    padding-top:20px;
-    padding-left:80px;
+    margin-left: 50px;
     padding-right:70px;
     font-family: "Cafe24Ssurround";
 }
@@ -67,6 +75,48 @@
 }
 
 .woman-animal-wrapper img, .man-animal-wrapper img {
-    margin: 5px;
+    margin-left: 5px;
     width: 80px;
+}
+
+
+.noticeboard-booth {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    line-height: 2;
+    font-size: 1.2rem;
+    padding-top: 10px;
+}
+
+.noticeboard-measurement {
+    border-radius: 40px;
+    height: 510px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 5px 10px -7px rgba(255, 0, 0, 0.3), 0 5px 15px -10px rgba(0, 0, 0, 0.5); /* 여러 그림자 */
+    margin-left: 10px;
+}
+.noticeboard-meeting {
+    border-radius: 40px;
+    height: 510px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 5px 10px -7px rgba(255, 0, 0, 0.3), 0 5px 15px -10px rgba(0, 0, 0, 0.5); /* 여러 그림자 */
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.noticeboard-measurement-sub-title, .noticeboard-meeting-sub-title  {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    align-items: center;
+    text-align: center;
+}
+
+.noticeboard-meeting-content, .noticeboard-measurement-content{
+    padding: 0px 20px;
 }
