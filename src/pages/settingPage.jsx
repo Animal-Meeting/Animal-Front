@@ -51,8 +51,44 @@ const SettingPage = () => {
 
     useEffect(() => {
         setSelectedGender(null);
+
+         // 키보드 입력
+         const handleKeyDown = (event) => {
+            if (event.key === 'q' || event.key === 'Q') {
+                setSelectedGender("FEMALE");
+                handleGenderSelect("FEMALE");
+            } else if (event.key === 'w' || event.key === 'W') {
+                setSelectedGender("MALE");
+                handleGenderSelect("MALE");
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+
     }, []);
 
+    const handleGenderSelect = (gender) => {
+        let modelURL, metadataURL, weightsURL;
+        if (gender === "FEMALE") {
+            modelURL = process.env.PUBLIC_URL + "/models/girl/model.json";
+            metadataURL = process.env.PUBLIC_URL + "/models/girl/metadata.json";
+            weightsURL = process.env.PUBLIC_URL + "/models/girl/weights.bin";
+        } else if (gender === "MALE") {
+            modelURL = process.env.PUBLIC_URL + "/models/boy/model.json";
+            metadataURL = process.env.PUBLIC_URL + "/models/boy/metadata.json";
+            weightsURL = process.env.PUBLIC_URL + "/models/boy/weights.bin";
+        }
+        setModelURL(modelURL);
+        setMetadataURL(metadataURL);
+        setWeightsURL(weightsURL);
+        navigate("/test");
+    };
+
+    
     const isColumn = useMediaQuery({
         query: "(max-aspect-ratio: 1/1)",
     });
@@ -114,17 +150,8 @@ const SettingPage = () => {
                         <img className="selectBubble" src={`${process.env.PUBLIC_URL}/img/selectBubble.png`} />
                         <div className="select-text">
                             <p
-                                onClick={() => {
-                                    setModelURL(process.env.PUBLIC_URL + "/models/girl/model.json");
-                                    setMetadataURL(process.env.PUBLIC_URL + "/models/girl/metadata.json");
-                                    setWeightsURL(process.env.PUBLIC_URL + "/models/girl/weights.bin");
-                                    navigate("/test");
-                                }}
-                                onMouseEnter={() => {
-                                    setSelectedGender("FEMALE");
-                                    setPreviousTypingFinished(false);
-                                }
-                                }
+                                onClick={() => handleGenderSelect("FEMALE")}
+                                onMouseEnter={() => setSelectedGender("FEMALE")}
                                 onMouseLeave={() => setSelectedGender(null)}
                                 className={
                                     selectedGender === "FEMALE"
@@ -135,17 +162,8 @@ const SettingPage = () => {
                                 여자
                             </p>
                             <p
-                                onClick={() => {
-                                    setModelURL(process.env.PUBLIC_URL + "/models/boy/model.json");
-                                    setMetadataURL(process.env.PUBLIC_URL + "/models/boy/metadata.json");
-                                    setWeightsURL(process.env.PUBLIC_URL + "/models/boy/weights.bin");
-                                    navigate("/test");
-                                }}
-                                onMouseEnter={() => {
-                                    setSelectedGender("MALE");
-                                    setPreviousTypingFinished(false);
-                                }
-                                }
+                                onClick={() => handleGenderSelect("MALE")}
+                                onMouseEnter={() => setSelectedGender("MALE")}
                                 onMouseLeave={() => setSelectedGender(null)}
                                 className={
                                     selectedGender === "MALE"
