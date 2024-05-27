@@ -170,304 +170,304 @@ const AnimalTestPage = () => {
     return (
         <div className="main_container">
             <div className="screen_container">
-                <div className="center_container">
-                    {/* <div className="header_container_v1">
-                        <img style={{ 
-                            width: "450px", 
-                            marginTop : "45px"
-                        }} 
-                        src={`${process.env.PUBLIC_URL}/img/mainLogoNew.png`} />
-                    </div> */}
-                    <div className="header_container_v2">
-                        <GradientButton
-                            content="Ai Animal Test"
-                            buttonStyle={{display: "none"}}
-                            textStyle={{
-                                fontSize: "2.6rem",
-                                fontWeight: "800",
-                            }}
-                        />
-                    </div>
-                    <div className="option_container">
-                        <GradientButton
-                            onClick={() => {
-                                setGender(null);
-                                navigate("/");
-                            }}
-                            content="뒤로가기"
-                            buttonStyle={{
-                                fontSize: "1rem",
-                                fontWeight: "800",
-                            }}
-                        />
-
-                        <div style={{ display: "flex", alignItems: "center" }}>
-                            {/* <div style={{ marginRight: "5px" }}>
-                                <GradientButton
-                                    onClick={() => {
-                                        setResultIndex((resultIndex + 1) % 6);
-                                    }}
-                                    content="TEST"
-                                    buttonStyle={{
-                                        fontSize: "1rem",
-                                        fontWeight: "800",
-                                        // display: "none"
-                                    }}
-                                />
-                            </div> */}
-                            <div style={{ marginRight: "5px" }}>
-                                <GradientButton
-                                    onClick={() => {
-                                        setIsFinished(false);
-                                        startPredicting();
-                                    }}
-                                    content="시작"
-                                    buttonStyle={{
-                                        fontSize: "1rem",
-                                        fontWeight: "800",
-                                    }}
-                                />
-                            </div>
-
-                            <RegistrationForm
-                                resultIndex={resultIndex}
-                                gender={gender}
-                                bar1Percentage={bar1Percentage}
-                                bar2Percentage={bar2Percentage}
-                                bar3Percentage={bar3Percentage}
-                                bar4Percentage={bar4Percentage}
-                                bar5Percentage={bar5Percentage}
-                                bar6Percentage={bar6Percentage}
-                                showRotatingImage={showRotatingImage}
-                                setShowRotatingImage={setShowRotatingImage}
+                    <div className="center_container">
+                        {/* <div className="header_container_v1">
+                            <img style={{ 
+                                width: "450px", 
+                                marginTop : "45px"
+                            }} 
+                            src={`${process.env.PUBLIC_URL}/img/mainLogoNew.png`} />
+                        </div> */}
+                        <div className="header_container_v2">
+                            <GradientButton
+                                content="Ai Animal Test"
+                                buttonStyle={{display: "none"}}
+                                textStyle={{
+                                    fontSize: "2.6rem",
+                                    fontWeight: "800",
+                                }}
                             />
                         </div>
-                    </div>
-                    <div className="webcam_container">
-                        {isFinished ? (
-                            <div
-                                style={{
-                                    width: "100%",
-                                    height: "100%",
-                                    textAlign: "center",
-                                    backgroundColor: "white",
-                                    paddingTop: "30px",
-                                    // paddingBottom : "20px",
-                                    borderRadius: "10px",
-                                    boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.2)",
-                                    border: "1px solid rgba(0, 0, 0, 0.1)",
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                    
+                        <div className="option_container" style={{display: showRotatingImage ? "" : "none"}}>
+                            <GradientButton
+                                onClick={() => {
+                                    setGender(null);
+                                    navigate("/");
                                 }}
-                            >
-                                {showRotatingImage ? (
-                                    <RotatingImage
-                                        height="30vh"
-                                        width="30vh"
-                                        front={process.env.PUBLIC_URL + animalData.image}
-                                        back={process.env.PUBLIC_URL + animalData.subImage}
-                                    />
-                                ) : (
-                                    <span>
-                                        <img
-                                            src={process.env.PUBLIC_URL + animalData.image}
-                                            alt={animalData.type}
-                                            style={{
-                                                width: "30vh",
-                                                height: "30vh",
-                                                objectFit: "cover",
-                                                borderRadius: "20px",
-                                                border: "5px solid gainsboro",
-                                                marginRight: "10px",
-                                            }}
-                                        />
-                                        <img
-                                            src={process.env.PUBLIC_URL + animalData.subImage}
-                                            alt={animalData.type}
-                                            style={{
-                                                width: "30vh",
-                                                height: "30vh",
-                                                objectFit: "cover",
-                                                borderRadius: "20px",
-                                                border: "5px solid gainsboro",
-                                                marginLeft: "10px",
-                                            }}
-                                        />
-                                    </span>
-                                )}
+                                content="뒤로가기"
+                                buttonStyle={{
+                                    fontSize: "1rem",
+                                    fontWeight: "800",
+                                }}
+                            />
 
-                                <p style={{ 
-                                 fontSize: "3rem", 
-                                 marginTop: "60px", 
-                                 fontWeight: "bold",
-                                 color: "#333",
-                                 textDecoration: "underline",
-                                 textDecorationColor: "#0ea5e9",
-                                 textDecorationStyle: "wavy",
-                                 fontFamily: "Cafe24Ssurround"                         
-                                 }}>
-                                    {animalData && animalData.type}
-                                </p>
-                                <p
-                                    style={{
-                                        fontSize: "1.5rem",
-                                        marginTop: "10px",
-                                        color: "#555",
-                                        lineHeight: "1.6",
-                                        margin: "0",
-                                    }}
-                                >
-                                    {animalData &&
-                                        animalData.characteristics.map((characteristic, index) => (
-                                            <p key={index} style={{
-                                                 margin: "0", 
-                                                 }}>
-                                                {characteristic}
-                                            </p>
-                                        ))}
-                                </p>
-                                <p
-                                    style={{
-                                        fontSize: "1.5rem",
-                                        marginTop: "10px",
-                                        color: "#555",
-                                        lineHeight: "1.6",
-                                        fontFamily: "Cafe24Ssurround",
-                                    }}
-                                >
-                                    {animalData && animalData.celebrities}
-                                </p>
-                            </div>
-                        ) : (
-                            <div
-                                style={{
-                                    width: "100%",
-                                    height: "100%",
-                                    textAlign: "center",
-                                    backgroundColor: "white",
-                                    paddingBottom: "30px",
-                                    paddingTop : "30px",
-                                    borderRadius: "10px",
-                                    boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.2)",
-                                    border: "1px solid rgba(0, 0, 0, 0.1)",
-                                }}
-                                
-                            >
-                                <Webcam
-                                    ref={webcamRef}
-                                    mirrored={true}
-                                    width={"95%"}
-                                    height={"95%"}
-                                    style={{ borderRadius: "10px" }}
-                                    muted={false}
+                            <div style={{ display: "flex", alignItems: "center" }}>
+                                <div style={{ marginRight: "5px" }}>
+                                    {/* <GradientButton
+                                        onClick={() => {
+                                            setResultIndex((resultIndex + 1) % 6);
+                                        }}
+                                        content="TEST"
+                                        buttonStyle={{
+                                            fontSize: "1rem",
+                                            fontWeight: "800",
+                                            // display: "none"
+                                        }}
+                                    /> */}
+                                </div>
+                                <div style={{ marginRight: "5px" }}>
+                                    <GradientButton
+                                        onClick={() => {
+                                            setIsFinished(false);
+                                            startPredicting();
+                                        }}
+                                        content="시작"
+                                        buttonStyle={{
+                                            fontSize: "1rem",
+                                            fontWeight: "800",
+                                        }}
+                                    />
+                                </div>
+
+                                <RegistrationForm
+                                    resultIndex={resultIndex}
+                                    gender={gender}
+                                    bar1Percentage={bar1Percentage}
+                                    bar2Percentage={bar2Percentage}
+                                    bar3Percentage={bar3Percentage}
+                                    bar4Percentage={bar4Percentage}
+                                    bar5Percentage={bar5Percentage}
+                                    bar6Percentage={bar6Percentage}
+                                    showRotatingImage={showRotatingImage}
+                                    setShowRotatingImage={setShowRotatingImage}
                                 />
-                                <div style={{ width: "100%", height: "100%" }}></div>
                             </div>
-                        )}
-                        {countdown > 0 && (
-                            <div
-                                style={{
-                                    position: "absolute",
-                                    top: "40%",
-                                    left: "35%",
-                                    transform: "translate(-50%, -50%)",
-                                    fontSize: "5rem",
-                                    color: "white",
+                        </div>
+                        <div className="webcam_container">
+                            {isFinished ? (
+                                <div
+                                    style={{
+                                        width: "100%",
+                                        height: "100%",
+                                        textAlign: "center",
+                                        backgroundColor: "white",
+                                        paddingTop: "30px",
+                                        // paddingBottom : "20px",
+                                        borderRadius: "10px",
+                                        boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.2)",
+                                        border: "1px solid rgba(0, 0, 0, 0.1)",
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        alignItems: "center",
+                                        justifyContent: "center",
+                                        
+                                    }}
+                                >
+                                    {showRotatingImage ? (
+                                        <RotatingImage
+                                            height="30vh"
+                                            width="30vh"
+                                            front={process.env.PUBLIC_URL + animalData.image}
+                                            back={process.env.PUBLIC_URL + animalData.subImage}
+                                        />
+                                    ) : (
+                                        <span>
+                                            <img
+                                                src={process.env.PUBLIC_URL + animalData.image}
+                                                alt={animalData.type}
+                                                style={{
+                                                    width: "30vh",
+                                                    height: "30vh",
+                                                    objectFit: "cover",
+                                                    borderRadius: "20px",
+                                                    border: "5px solid gainsboro",
+                                                    marginRight: "10px",
+                                                }}
+                                            />
+                                            <img
+                                                src={process.env.PUBLIC_URL + animalData.subImage}
+                                                alt={animalData.type}
+                                                style={{
+                                                    width: "30vh",
+                                                    height: "30vh",
+                                                    objectFit: "cover",
+                                                    borderRadius: "20px",
+                                                    border: "5px solid gainsboro",
+                                                    marginLeft: "10px",
+                                                }}
+                                            />
+                                        </span>
+                                    )}
+
+                                    <p style={{ 
+                                    fontSize: "3rem", 
+                                    marginTop: "60px", 
                                     fontWeight: "bold",
-                                    textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
-                                }}
-                            >
-                                {Math.ceil(countdown)}
-                            </div>
-                        )}
-                        {startMessage && (
-                            <div
-                                style={{
-                                    position: "absolute",
-                                    top: "40%",
-                                    left: "35%",
-                                    transform: "translate(-50%, -50%)",
-                                    fontSize: "5rem",
-                                    color: "white",
-                                    fontWeight: "bold",
-                                    textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
-                                }}
-                            >
-                                {startMessage}
-                            </div>
-                        )}
-                    </div>
-                    <div className="percentage_bar_container">
-                        <PercentageBar
-                            title="강아지상"
-                            iconSrc={
-                                gender === "MALE"
-                                    ? process.env.PUBLIC_URL + "img/man-animal/dog.png"
-                                    : "img/woman-animal/dog-woman.png"
-                            }
-                            bgColor="#FF99C8"
-                            bgBaseColor="#f0bcd4"
-                            percentage={bar1Percentage}
-                        />
-                        <PercentageBar
-                            title="고양이상"
-                            iconSrc={
-                                gender === "MALE"
-                                    ? process.env.PUBLIC_URL + "img/man-animal/cat-man.png"
-                                    : "img/woman-animal/cat-woman.png"
-                            }
-                            bgColor="#f7efa6"
-                            bgBaseColor="#faf7dd"
-                            percentage={bar2Percentage}
-                        />
-                        <PercentageBar
-                            title={gender === "MALE" ? "곰상" : "여우상"}
-                            iconSrc={
-                                gender === "MALE"
-                                    ? process.env.PUBLIC_URL + "img/man-animal/bear.png"
-                                    : "img/woman-animal/fox.png"
-                            }
-                            bgColor="#aef4c9"
-                            bgBaseColor="#ddefe4"
-                            percentage={bar3Percentage}
-                        />
-                        <PercentageBar
-                            title={gender === "MALE" ? "공룡상" : "토끼상"}
-                            iconSrc={
-                                gender === "MALE"
-                                    ? process.env.PUBLIC_URL + "img/man-animal/dinosaur.png"
-                                    : "img/woman-animal/rabbit-woman.png"
-                            }
-                            bgColor="#A9DEF9"
-                            bgBaseColor="#ceeaf8"
-                            percentage={bar4Percentage}
-                        />
-                        <PercentageBar
-                            title={gender === "MALE" ? "늑대상" : "사슴상"}
-                            iconSrc={
-                                gender === "MALE"
-                                    ? process.env.PUBLIC_URL + "img/man-animal/wolf.png"
-                                    : "img/woman-animal/deer.png"
-                            }
-                            bgColor="#E4C1F9"
-                            bgBaseColor="#ebd8f7"
-                            percentage={bar5Percentage}
-                        />
-                        <PercentageBar
-                            title={gender === "MALE" ? "토끼상" : "햄스터상"}
-                            iconSrc={
-                                gender === "MALE"
-                                    ? process.env.PUBLIC_URL + "img/man-animal/rabbit-man.png"
-                                    : "img/woman-animal/hamster.png"
-                            }
-                            bgColor="#fca951"
-                            bgBaseColor="#ffe0c0"
-                            percentage={bar6Percentage}
-                        />
-                    </div>
+                                    color: "#333",
+                                    textDecoration: "underline",
+                                    textDecorationColor: "#0ea5e9",
+                                    textDecorationStyle: "wavy",
+                                    fontFamily: "Cafe24Ssurround"                         
+                                    }}>
+                                        {animalData && animalData.type}
+                                    </p>
+                                    <p
+                                        style={{
+                                            fontSize: "1.5rem",
+                                            marginTop: "10px",
+                                            color: "#555",
+                                            lineHeight: "1.6",
+                                            margin: "0",
+                                        }}
+                                    >
+                                        {animalData &&
+                                            animalData.characteristics.map((characteristic, index) => (
+                                                <p key={index} style={{
+                                                    margin: "0", 
+                                                    }}>
+                                                    {characteristic}
+                                                </p>
+                                            ))}
+                                    </p>
+                                    <p
+                                        style={{
+                                            fontSize: "1.5rem",
+                                            marginTop: "10px",
+                                            color: "#555",
+                                            lineHeight: "1.6",
+                                            fontFamily: "Cafe24Ssurround",
+                                        }}
+                                    >
+                                        {animalData && animalData.celebrities}
+                                    </p>
+                                </div>
+                            ) : (
+                                <div
+                                    style={{
+                                        width: "100%",
+                                        height: "100%",
+                                        textAlign: "center",
+                                        backgroundColor: "white",
+                                        paddingBottom: "30px",
+                                        paddingTop : "30px",
+                                        borderRadius: "10px",
+                                        boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.2)",
+                                        border: "1px solid rgba(0, 0, 0, 0.1)",
+                                    }}
+                                    
+                                >
+                                    <Webcam
+                                        ref={webcamRef}
+                                        mirrored={true}
+                                        width={"95%"}
+                                        height={"95%"}
+                                        style={{ borderRadius: "10px" }}
+                                        muted={false}
+                                    />
+                                    <div style={{ width: "100%", height: "100%" }}></div>
+                                </div>
+                            )}
+                            {countdown > 0 && (
+                                <div
+                                    style={{
+                                        position: "absolute",
+                                        top: "40%",
+                                        left: "35%",
+                                        transform: "translate(-50%, -50%)",
+                                        fontSize: "5rem",
+                                        color: "white",
+                                        fontWeight: "bold",
+                                        textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+                                    }}
+                                >
+                                    {Math.ceil(countdown)}
+                                </div>
+                            )}
+                            {startMessage && (
+                                <div
+                                    style={{
+                                        position: "absolute",
+                                        top: "40%",
+                                        left: "35%",
+                                        transform: "translate(-50%, -50%)",
+                                        fontSize: "5rem",
+                                        color: "white",
+                                        fontWeight: "bold",
+                                        textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+                                    }}
+                                >
+                                    {startMessage}
+                                </div>
+                            )}
+                        </div>
+                        <div className="percentage_bar_container">
+                            <PercentageBar
+                                title="강아지상"
+                                iconSrc={
+                                    gender === "MALE"
+                                        ? process.env.PUBLIC_URL + "img/man-animal/dog.png"
+                                        : "img/woman-animal/dog-woman.png"
+                                }
+                                bgColor="#FF99C8"
+                                bgBaseColor="#f0bcd4"
+                                percentage={bar1Percentage}
+                            />
+                            <PercentageBar
+                                title="고양이상"
+                                iconSrc={
+                                    gender === "MALE"
+                                        ? process.env.PUBLIC_URL + "img/man-animal/cat-man.png"
+                                        : "img/woman-animal/cat-woman.png"
+                                }
+                                bgColor="#f7efa6"
+                                bgBaseColor="#faf7dd"
+                                percentage={bar2Percentage}
+                            />
+                            <PercentageBar
+                                title={gender === "MALE" ? "곰상" : "여우상"}
+                                iconSrc={
+                                    gender === "MALE"
+                                        ? process.env.PUBLIC_URL + "img/man-animal/bear.png"
+                                        : "img/woman-animal/fox.png"
+                                }
+                                bgColor="#aef4c9"
+                                bgBaseColor="#ddefe4"
+                                percentage={bar3Percentage}
+                            />
+                            <PercentageBar
+                                title={gender === "MALE" ? "공룡상" : "토끼상"}
+                                iconSrc={
+                                    gender === "MALE"
+                                        ? process.env.PUBLIC_URL + "img/man-animal/dinosaur.png"
+                                        : "img/woman-animal/rabbit-woman.png"
+                                }
+                                bgColor="#A9DEF9"
+                                bgBaseColor="#ceeaf8"
+                                percentage={bar4Percentage}
+                            />
+                            <PercentageBar
+                                title={gender === "MALE" ? "늑대상" : "사슴상"}
+                                iconSrc={
+                                    gender === "MALE"
+                                        ? process.env.PUBLIC_URL + "img/man-animal/wolf.png"
+                                        : "img/woman-animal/deer.png"
+                                }
+                                bgColor="#E4C1F9"
+                                bgBaseColor="#ebd8f7"
+                                percentage={bar5Percentage}
+                            />
+                            <PercentageBar
+                                title={gender === "MALE" ? "토끼상" : "햄스터상"}
+                                iconSrc={
+                                    gender === "MALE"
+                                        ? process.env.PUBLIC_URL + "img/man-animal/rabbit-man.png"
+                                        : "img/woman-animal/hamster.png"
+                                }
+                                bgColor="#fca951"
+                                bgBaseColor="#ffe0c0"
+                                percentage={bar6Percentage}
+                            />
+                        </div>
                 </div>
             </div>
             <div className="right_container">

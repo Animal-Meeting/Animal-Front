@@ -39,7 +39,13 @@ const RegistrationForm = (props) => {
     }, [props.showRotatingImage]);
 
     async function screenshot() {
-        const canvas = await html2canvas(document.body);
+        const divToCapture = document.querySelector('.screen_container');
+
+        const canvas = await html2canvas(divToCapture, {
+            exclude: [
+                document.querySelector('.gradient_button'),
+            ],
+        });
         const screenshot = canvas.toDataURL("image/jpeg");
         const animalPhotoBlob = dataURLtoBlob(screenshot);
         const animalPhoto = new File([animalPhotoBlob], "animalPhoto.jpg", { type: "image/jpeg" });
@@ -146,7 +152,7 @@ const RegistrationForm = (props) => {
                         <FormLabel help="결과이미지.">이미지</FormLabel>
 
                         <HStack justify="center" style={{ marginBottom: 10 }}>
-                            {resultImageUrl && <ImageView url={resultImageUrl} height={400} />}
+                            {resultImageUrl && <ImageView url={resultImageUrl} width={400} />}
                         </HStack>
                     </FormControl>
                 </ModalBody>
