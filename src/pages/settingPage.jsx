@@ -68,7 +68,7 @@ const SettingPage = () => {
     return (
         <div className="container">
             <div className="participant-wrapper">
-                {isRow && (
+                {/* {isRow && (
                     <Statistic
                         count="8"
                         most_woman_animal="토끼상"
@@ -76,11 +76,11 @@ const SettingPage = () => {
                         most_woman_path="rabbit-woman"
                         most_man_path="wolf"
                     />
-                )}
+                )} */}
             </div>
             <div className="content-wrapper">
                 <div className="header">
-                    <img className="mainLogo" src={`${process.env.PUBLIC_URL}/img/mainLogo.png`} />
+                    <img className="mainLogo" src={`${process.env.PUBLIC_URL}/img/mainLogoNew.png`} />
                 </div>
 
                 <div className="main">
@@ -120,7 +120,11 @@ const SettingPage = () => {
                                     setWeightsURL(process.env.PUBLIC_URL + "/models/girl/weights.bin");
                                     navigate("/test");
                                 }}
-                                onMouseEnter={() => setSelectedGender("FEMALE")}
+                                onMouseEnter={() => {
+                                    setSelectedGender("FEMALE");
+                                    setPreviousTypingFinished(false);
+                                }
+                                }
                                 onMouseLeave={() => setSelectedGender(null)}
                                 className={
                                     selectedGender === "FEMALE"
@@ -137,7 +141,11 @@ const SettingPage = () => {
                                     setWeightsURL(process.env.PUBLIC_URL + "/models/boy/weights.bin");
                                     navigate("/test");
                                 }}
-                                onMouseEnter={() => setSelectedGender("MALE")}
+                                onMouseEnter={() => {
+                                    setSelectedGender("MALE");
+                                    setPreviousTypingFinished(false);
+                                }
+                                }
                                 onMouseLeave={() => setSelectedGender(null)}
                                 className={
                                     selectedGender === "MALE"
@@ -151,11 +159,11 @@ const SettingPage = () => {
                     </div>
                 </div>
             </div>
-            {isRow && (
+            {/* {isRow && (
                 <div className="noticeboard-wrapper">
                     <NoticeBoard />
                 </div>
-            )}
+            )} */}
         </div>
     );
 };

@@ -449,9 +449,9 @@ const AnimalTestPage = () => {
                     </div>
                 </div>
             </div>
-            <div className="right_container">
+            {/* <div className="right_container">
                 <NoticeBoard />
-            </div>
+            </div> */}
         </div>
     );
 };
