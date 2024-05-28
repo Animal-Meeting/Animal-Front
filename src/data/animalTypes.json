@@ -14,7 +14,7 @@
                 "celebrities": "강아지상 연예인 : [ 박보검, 진, 임시완, 백현, 정해인, 박형식 ]"
             },
             {
-                "image": "img/resultImg/man_cat.jpeg",
+                "image": "img/resultImg/man_cat.png",
                 "subImage": "img/man-animal/cat-man.png",
                 "typeEnglish": "CAT",
                 "type": "고양이상",
@@ -26,7 +26,7 @@
                 "celebrities": "고양이상 연예인 : [ 강동원, 시우민, 현진, 황인엽, 황민현, 최현욱 ]"
             },
             {
-                "image": "img/resultImg/man_bear.jpg",
+                "image": "img/resultImg/man_bear.jpeg",
                 "subImage": "img/man-animal/bear.png",
                 "typeEnglish": "BEAR",
                 "type": "곰상",
