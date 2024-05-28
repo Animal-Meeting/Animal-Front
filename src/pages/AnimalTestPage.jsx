@@ -47,7 +47,6 @@ const AnimalTestPage = () => {
     const intervalRef = useRef(null);
     const focusRef = useRef(null);
     const startButtonRef = useRef(null);
-    const registerButtonRef = useRef(null);
 
     useEffect(() => {
         if (gender == null) {
@@ -80,9 +79,7 @@ const AnimalTestPage = () => {
                 navigate("/");
             }
             else if (event.key === 'e' || event.key === 'E') {
-                if (registerButtonRef.current) {
-                    registerButtonRef.current.click();
-                }
+               
             }
         };
 
@@ -313,7 +310,7 @@ const AnimalTestPage = () => {
 
                             <div style={{ display: "flex", alignItems: "center" }}>
                                 <div style={{ marginRight: "5px" }}>
-                                    {/* <GradientButton
+                                    <GradientButton
                                         onClick={() => {
                                             setResultIndex((resultIndex + 1) % 6);
                                         }}
@@ -323,7 +320,7 @@ const AnimalTestPage = () => {
                                             fontWeight: "800",
                                             // display: "none"
                                         }}
-                                    /> */}
+                                    />
                                 </div>
                                 <div style={{ marginRight: "5px" }}>
                                     <GradientButton
@@ -341,7 +338,6 @@ const AnimalTestPage = () => {
                                 </div>
 
                                 <RegistrationForm
-                                    // ref={registerButtonRef}
                                     resultIndex={resultIndex}
                                     gender={gender}
                                     bar1Percentage={bar1Percentage}
