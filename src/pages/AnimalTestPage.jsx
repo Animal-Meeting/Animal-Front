@@ -310,7 +310,7 @@ const AnimalTestPage = () => {
 
                             <div style={{ display: "flex", alignItems: "center" }}>
                                 <div style={{ marginRight: "5px" }}>
-                                    <GradientButton
+                                    {/* <GradientButton
                                         onClick={() => {
                                             setResultIndex((resultIndex + 1) % 6);
                                         }}
@@ -320,7 +320,7 @@ const AnimalTestPage = () => {
                                             fontWeight: "800",
                                             // display: "none"
                                         }}
-                                    />
+                                    /> */}
                                 </div>
                                 <div style={{ marginRight: "5px" }}>
                                     <GradientButton
