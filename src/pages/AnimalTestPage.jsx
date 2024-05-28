@@ -43,12 +43,69 @@ const AnimalTestPage = () => {
 
     const [showRotatingImage, setShowRotatingImage] = useState(true);
 
+    const fakeWeightsRef = useRef([0, 0, 0, 0, 0, 0]);
+    const intervalRef = useRef(null);
+    const focusRef = useRef(null);
+    const startButtonRef = useRef(null);
+    const registerButtonRef = useRef(null);
+
     useEffect(() => {
         if (gender == null) {
             navigate("/");
         } else {
             loadFiles();
         }
+        const handleKeyDown = (event) => {
+            if (event.key >= "1" && event.key <= "6") {
+                // 1부터 6까지의 숫자 키가 눌리면 해당 인덱스의 가중치 추가을 시작합니다.
+                const index = parseInt(event.key) - 1; // 인덱스는 0부터 시작하므로 입력된 키에서 1을 빼줍니다.
+
+                // 버튼 클릭 트리거
+                if (startButtonRef.current) {
+                    startButtonRef.current.click();
+                }
+                startFakeKeyInput(index);
+
+            }
+            // 시작버튼
+            else if (event.key === 'w' || event.key === 'W') {
+                if (startButtonRef.current) {
+                    startButtonRef.current.click();
+                }
+            }
+            else if (event.key === 'q' || event.key === 'Q') {
+
+                // 뒤로가기
+                setGender(null);
+                navigate("/");
+            }
+            else if (event.key === 'e' || event.key === 'E') {
+                if (registerButtonRef.current) {
+                    registerButtonRef.current.click();
+                }
+            }
+        };
+
+        const handleWindowFocus = () => {
+            if (focusRef.current) {
+                focusRef.current.focus();
+            }
+        };
+
+
+        window.addEventListener("keydown", handleKeyDown);
+        window.addEventListener("focus", handleWindowFocus);
+
+        // 컴포넌트가 마운트될 때 포커스를 설정합니다.
+        if (focusRef.current) {
+            focusRef.current.focus();
+        }
+
+        return () => {
+            window.removeEventListener("keydown", handleKeyDown);
+            window.removeEventListener("focus", handleWindowFocus);
+        };
+
     }, []);
 
     useEffect(() => {
@@ -102,29 +159,80 @@ const AnimalTestPage = () => {
     }
 
     async function loadFiles() {
-        setModelFile(await fetchFile(modelURL, "model.json"));
-        setWeightsFile(await fetchFile(weightsURL, "weights.bin"));
-        setMetadataFile(await fetchFile(metadataURL, "metadata.json"));
+        try {
+            const modelFile = await fetchFile(modelURL, "model.json");
+            const weightsFile = await fetchFile(weightsURL, "weights.bin");
+            const metadataFile = await fetchFile(metadataURL, "metadata.json");
+
+            console.log("modelFileBlob:", modelFile);
+            console.log("weightsFileBlob:", weightsFile);
+            console.log("metadataFileBlob:", metadataFile);
+
+            setModelFile(modelFile);
+            setWeightsFile(weightsFile);
+            setMetadataFile(metadataFile);
+        } catch (error) {
+            console.error("파일 로드 에러:", error);
+        }
     }
 
     async function loadModel() {
         console.log("init model");
-        setModel(await tmImage.loadFromFiles(modelFile, weightsFile, metadataFile));
+        try {
+
+            await Promise.all([modelFile, weightsFile, metadataFile]);
+            console.log("modelFile:", modelFile);
+            console.log("weightsFile:", weightsFile);
+            console.log("metadataFile:", metadataFile);
+
+            const loadedModel = await tmImage.loadFromFiles(modelFile, weightsFile, metadataFile);
+            setModel(loadedModel);
+        } catch (error) {
+            console.error("모델 로드 중 에러:", error);
+        }
+    }
+
+    function startFakeKeyInput(index) {
+
+        fakeWeightsRef.current = fakeWeightsRef.current.map((weight, i) =>
+            i === index ? weight + 2 : weight
+        );
+        console.log("즉시 가중치 업데이트:", fakeWeightsRef.current);
+
+        // 1초 후에 한 번 더 업데이트
+        setTimeout(() => {
+            fakeWeightsRef.current = fakeWeightsRef.current.map((weight, i) =>
+                i === index ? weight + 2 : weight
+            );
+            console.log("1초 후 가중치 업데이트:", fakeWeightsRef.current);
+        }, 1000);
     }
 
     async function predict() {
         if (model) {
-            let prediction = await model.predict(webcamRef.current.video);
-            console.log(prediction);
+            try {
+                const prediction = await model.predict(webcamRef.current.video);
+                console.log(prediction);
 
-            const newCumulativePredictions = cumulativePredictions.map(
-                (value, index) => value + prediction[index].probability + Math.random() * 0.2
-            );
+                // const newCumulativePredictions = cumulativePredictions.map(
+                //     (value, index) => value + prediction[index].probability + (Math.random()) * (0.1 + fakeWeightsRef.current[index])//.toFixed(2)*100 //+ (Math.random() - 0.4) * 0.05
+                // );
 
-            setCumulativePredictions(newCumulativePredictions);
-            console.log("result update");
+                //누적값 빼기
+                const newCumulativePredictions = cumulativePredictions.map(
+                    (value, index) => prediction[index].probability + (Math.random()) * (0.2 + fakeWeightsRef.current[index])
+                );
+
+                console.log("실제로 적용된 값 ", fakeWeightsRef.current)
+                setCumulativePredictions(newCumulativePredictions);
+
+                console.log("예측 업데이트:", newCumulativePredictions);
+
+            } catch (error) {
+                console.error("예측 중 에러:", error);
+            }
         } else {
-            console.log("model undefined");
+            console.log("모델이 정의되지 않았습니다.");
         }
     }
 
@@ -147,6 +255,8 @@ const AnimalTestPage = () => {
                     }, 1000);
                 }
             }, 1000);
+        }).catch(error => {
+            console.error("예측 시작 중 에러:", error);
         });
     }
 
@@ -217,6 +327,7 @@ const AnimalTestPage = () => {
                                 </div>
                                 <div style={{ marginRight: "5px" }}>
                                     <GradientButton
+                                        ref={startButtonRef}
                                         onClick={() => {
                                             setIsFinished(false);
                                             startPredicting();
@@ -230,6 +341,7 @@ const AnimalTestPage = () => {
                                 </div>
 
                                 <RegistrationForm
+                                    // ref={registerButtonRef}
                                     resultIndex={resultIndex}
                                     gender={gender}
                                     bar1Percentage={bar1Percentage}

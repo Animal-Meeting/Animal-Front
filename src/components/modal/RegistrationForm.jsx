@@ -26,7 +26,7 @@ import html2canvas from "html2canvas";
 import { dataURLtoBlob } from "../../utils/FileUtil";
 import { RingLoader } from "react-spinners";
 
-const RegistrationForm = (props) => {
+const RegistrationForm = React.forwardRef((props, ref) => {
     const [studentId, setStudentId] = useState("");
     const [resultImageUrl, setResultImageUrl] = useState("");
     const [resultImageFile, setResultImageFile] = useState(null);
@@ -93,7 +93,8 @@ const RegistrationForm = (props) => {
     }
 
     return (
-        <Modal>
+        <Modal
+        ref={ref}>
             {loading && (
                 <div
                     style={{
@@ -202,6 +203,6 @@ const RegistrationForm = (props) => {
             </ModalContent>
         </Modal>
     );
-};
+});
 
 export default RegistrationForm;
